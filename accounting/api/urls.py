@@ -1,12 +1,7 @@
 from django.urls import path
-from . import views
+from .views import *
 
 urlpatterns = [
-    path("journalentry/",
-        views.JournalEntryListCreate.as_view(),
-        name="journalentry-view-create"),
-
-    path("journalentry/<int:pk>/",
-        views.JournalEntryRetrieveUpdateDestroy.as_view(),
-        name="update")
+    path('journalentries/', journal_entry_list_create, name='journalentry-list-create'),
+    path('journalentry/<int:pk>/', journal_entry_retrieve_update_destroy, name='journalentry-detail'),
 ]
