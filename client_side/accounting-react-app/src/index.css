@@ -1,0 +1,62 @@
+body, h1, p, ul, li, a, button, input, label, form {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* Navbar start*/ 
+.navbar {
+  background-color: #4f9253;
+  color: #fff;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-menu {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar-menu li {
+  display: inline;
+}
+
+.navbar-menu a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-menu a:hover {
+  background-color: #4f9253;
+  border-radius: 4px;
+}
+
+/* Navbar End */ 
+
+
+
+
+
+
+/* Footer start*/ 
+footer {
+  position: fixed;
+  bottom: 0;
+}
+/* Footer End */ 

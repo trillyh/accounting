@@ -1,0 +1,23 @@
+<nav class="navbar">
+    <div class="navbar-brand">Net Accounting</div>
+    <ul class="navbar-menu">
+        <li href="/logout.html" id="logout-link" style="display: none;">Logout</li>
+        <li href="/login.html" id="login-link">Login</li>
+        <li><a href="concepts.html">Concepts</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="playground.html">Playground</a></li>
+    </ul>
+</nav>
+
+<script>
+    const userIsAuthenticated = false; 
+    document.addEventListener('DOMContentLoaded', () => {
+        if (userIsAuthenticated) {
+            document.getElementById('login-link').style.display = 'none';
+            document.getElementById('logout-link').style.display = 'inline';
+        } else {
+            document.getElementById('login-link').style.display = 'inline';
+            document.getElementById('logout-link').style.display = 'none';
+        }
+    });
+</script>
