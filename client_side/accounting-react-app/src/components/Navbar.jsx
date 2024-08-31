@@ -7,8 +7,8 @@ function Navbar() {
             <ul className="navbar-menu">
                 <li><Link to="/about">About</Link></li> 
                 <li><Link to="/concepts">Concepts</Link></li> 
-                <li><Link to="/playground">Playground</Link></li> 
-                <li><a href="#">Business Management</a></li>
+                <li><Link to="/playground">Playground</Link></li>   
+                <li><Link to="/Auth">Login</Link></li>   
             </ul>
         </nav>
     );
