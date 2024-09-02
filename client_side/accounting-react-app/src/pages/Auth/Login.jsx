@@ -1,6 +1,19 @@
+import React, { useState } from 'react';
 function Login() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+
+    const data = {
+      username: username,
+      password: password 
+    }
+
+  }
   return (
-    <form id="login-form">
+    <form onSubmit={handleLogin} id="login-form">
       <label htmlFor="login-username">Username</label>
       <input type="text" id="login-username" required />
       
