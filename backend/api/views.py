@@ -18,9 +18,9 @@ from .serializers import JournalEntrySerializer, UserSerializer
 
 
 # Should be delete soon, for testing only, or add isAdminUser decor
-@api_view(['GET', 'POST', 'DELETE'])
-@authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
+@api_view(['GET', 'POST', 'DELETE']) #type: ignore
+@authentication_classes([TokenAuthentication]) #type: ignore
+@permission_classes([IsAuthenticated]) #type: ignore
 def journal_entry_list_create(request):
     if request.method == 'GET':
         entries = JournalEntry.objects.all()
@@ -38,7 +38,7 @@ def journal_entry_list_create(request):
         JournalEntry.objects.all().delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-@api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
+@api_view(['GET', 'PUT', 'PATCH', 'DELETE']) #type: ignore
 def journal_entry_retrieve_update_destroy(request, pk):
     try:
         entry = JournalEntry.objects.get(pk=pk)
