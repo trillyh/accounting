@@ -1,12 +1,13 @@
 <script src="http://localhost:8097"></script>
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import {useState} from 'React'
+import {useState} from 'react'
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import Concepts from './pages/Concepts.jsx';
 import About from'./pages/About.jsx';
 import Playground from './pages/Playground.jsx';
 import AuthPage from './pages/Auth/AuthPage.jsx';
+import Personal from './pages/Personal.jsx'
 
 function App() {
 	const [isLoggedIn, setIsloggedIn] = useState(true);
@@ -20,6 +21,7 @@ function App() {
 				<Route path="/about" element={<About/>} />
 				<Route path="/playground" element={<Playground/>}/>
 				<Route path="/auth" element={<AuthPage/>}/>
+				<Route path="/personal" element={<Personal/>}/>
 			</Routes>
 
 			<Footer/>

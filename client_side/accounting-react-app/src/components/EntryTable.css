@@ -1,0 +1,50 @@
+.table-container {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 800px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: #333;
+}
+
+thead tr {
+    background-color: #4CAF50;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+table th,
+table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #dddddd;
+}
+
+table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Every even entry will have darker background*/
+tbody tr:nth-of-type(even) { 
+    background-color: #f3f3f3;
+}
+
+/* For mobile when screen size is small*/
+@media (max-width: 600px) {
+    .table-container {
+        padding: 10px;
+    }
+
+    table th, table td {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+}
