@@ -7,6 +7,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -15,36 +16,62 @@ table {
     color: #333;
 }
 
-thead tr {
+table thead th {
     background-color: #4CAF50;
-    color: #ffffff;
+    color: white;
+    padding: 12px 15px;
     text-align: left;
-    font-weight: bold;
 }
 
-table th,
-table td {
+table tbody td {
     padding: 12px 15px;
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid #ddd;
+}
+
+
+table tbody tr:nth-of-type(even) {
+    background-color: #f1f1f1; 
 }
 
 table tbody tr:hover {
-    background-color: #f1f1f1;
+    background-color: #f0f8ff;
 }
 
-/* Every even entry will have darker background*/
-tbody tr:nth-of-type(even) { 
-    background-color: #f3f3f3;
+.subentry {
+    background-color: #f0f8ff !important;
 }
 
-/* For mobile when screen size is small*/
+input[type="text"], input[type="number"] {
+    margin-left: 10px;
+    padding: 8px;
+    font-size: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 180px;
+}
+
+label {
+    margin-right: 10px;
+}
+
+/* Responsive handling for smaller screens */
 @media (max-width: 600px) {
     .table-container {
         padding: 10px;
     }
 
-    table th, table td {
+    table thead th, table tbody td {
         padding: 8px 10px;
         font-size: 14px;
+    }
+
+    input[type="text"], input[type="number"] {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
     }
 }
