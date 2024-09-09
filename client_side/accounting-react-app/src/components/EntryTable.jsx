@@ -3,8 +3,7 @@ import './EntryTable.css';
 
 function EntryTable({ entries }) {
     const [expandedRows, setExpandedRows] = useState([]); // Store id of row being expanded
-
-	// This function takes a date, shortens it, then returns it
+// This function takes a date, shortens it, then returns it
     function shortenDate(inputDate) {
         const date = new Date(inputDate);
         if (isNaN(date.getTime())) {

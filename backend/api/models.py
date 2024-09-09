@@ -9,7 +9,7 @@ class JournalEntry(models.Model):
     description = models.CharField(max_length=250)
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return f"{self.description} created at {self.create_at}"
+        return f"{self.description} created at {self.created_at}"
 
 
 class SubEntry(models.Model):

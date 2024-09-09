@@ -38,6 +38,7 @@ def journal_entry_list_create(request):
         JournalEntry.objects.all().delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+# For referenece
 @api_view(['GET', 'PUT', 'PATCH', 'DELETE']) #type: ignore
 def journal_entry_retrieve_update_destroy(request, pk):
     try:
@@ -59,6 +60,20 @@ def journal_entry_retrieve_update_destroy(request, pk):
     elif request.method == 'DELETE':
         entry.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['POST']) #type: ignore
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def create_journal_entry(request):
+    user = request.user
+    data = request.data.copy() # B/c request.data is immutable 
+    data['user'] = user.id
+
+    serializer = JournalEntrySerializer(data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+    return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 def register_user(request):
