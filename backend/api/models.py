@@ -21,8 +21,8 @@ class SubEntry(models.Model):
         (CREDIT, 'Credit')
     ]
     journal_entry = models.ForeignKey(JournalEntry, on_delete=models.CASCADE)
-    sub_entry_type = models.CharField(max_length=255, choices=TYPE_CHOICES)
+    subentry_type = models.CharField(max_length=255, choices=TYPE_CHOICES)
     account = models.CharField(max_length=255) 
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     def __str__(self):
-        return f"{self.sub_entry_type} ${self.amount} in {self.account}" 
+        return f"{self.subentry_type} ${self.amount} in {self.account}" 

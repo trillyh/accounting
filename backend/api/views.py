@@ -14,7 +14,7 @@ from rest_framework.authentication import TokenAuthentication
 from .models import JournalEntry
 
 # serializers import
-from .serializers import JournalEntrySerializer, UserSerializer
+from .serializers import JournalEntrySerializer, SubEntrySerializer, UserSerializer
 
 
 # Should be delete soon, for testing only, or add isAdminUser decor
@@ -61,9 +61,9 @@ def journal_entry_retrieve_update_destroy(request, pk):
         entry.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-@api_view(['POST']) #type: ignore
-@authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
+@api_view(['POST'])#type: ignore
+@authentication_classes([TokenAuthentication])#type: ignore
+@permission_classes([IsAuthenticated])#type: ignore
 def create_journal_entry(request):
     user = request.user
     data = request.data.copy() # B/c request.data is immutable 
@@ -74,6 +74,33 @@ def create_journal_entry(request):
         serializer.save()
         return Response(data=serializer.data, status=status.HTTP_201_CREATED)
     return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])#type: ignore
+@authentication_classes([TokenAuthentication])#type: ignore
+@permission_classes([IsAuthenticated])#type: ignore
+def create_subentry(request):
+    user = request.user
+    
+    print(request.data["journal_entry_id"])
+    try:
+        journal_entry = JournalEntry.objects.get(pk=request.data["journal_entry_id"])
+    except: 
+        return Response(data={"error": "could not find journal entry with the supplied journal entry id"}, 
+                              status=status.HTTP_400_BAD_REQUEST)
+
+    if (user != None and journal_entry.user != user):
+        return Response(data={"error": "Not authorized to access other user subentry"}, 
+                              status=status.HTTP_400_BAD_REQUEST)    
+
+    data = request.data.copy()
+    data["user"] = user.id
+    data["journal_entry"] = journal_entry.pk
+
+    serializer = SubEntrySerializer(data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+    return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)       
 
 @api_view(['POST'])
 def register_user(request):
