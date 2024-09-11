@@ -10,7 +10,7 @@ import AuthPage from './pages/Auth/AuthPage.jsx';
 import Personal from './pages/Personal.jsx'
 
 function App() {
-	const [isLoggedIn, setIsloggedIn] = useState(true);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	return (
 		<Router>
@@ -20,7 +20,7 @@ function App() {
 				<Route path="/concepts" element={<Concepts/>} />
 				<Route path="/about" element={<About/>} />
 				<Route path="/playground" element={<Playground/>}/>
-				<Route path="/auth" element={<AuthPage/>}/>
+				<Route path="/auth" element={<AuthPage setIsLoggedIn={setIsLoggedIn}/>}/>
 				<Route path="/personal" element={<Personal/>}/>
 			</Routes>
 
