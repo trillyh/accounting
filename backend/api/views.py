@@ -115,10 +115,20 @@ def register_user(request):
 def login(request):
     username: str = request.data.get('username')
     password: str = request.data.get('password')
+
+    if not username or not password:
+        return Response(data={'error': 'Username and password are required'}, status=status.HTTP_400_BAD_REQUEST)
+
     user = authenticate(username=username, password=password)
     if user is not None:
-        token = Token.objects.create(user=user)
-        return Response(data={'token':token.key}, status=status.HTTP_200_OK)
+        existing_token = Token.objects.filter(user=user).first()
+
+        if existing_token is not None:
+            return Response(data={'token':existing_token.key}, status=status.HTTP_200_OK)
+
+        else: 
+            new_token = Token.objects.create(user=user)
+            return Response(data={'token':new_token.key}, status=status.HTTP_200_OK)
     else:
         return Response(data={'error': 'Username or password is not correct'}, status=status.HTTP_400_BAD_REQUEST)
 

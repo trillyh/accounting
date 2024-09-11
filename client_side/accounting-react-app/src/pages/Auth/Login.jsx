@@ -22,10 +22,13 @@ function Login({setIsLoggedIn}) {
 		try {
 			const res = await fetch(loginUrl, {
 				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
 				body: JSON.stringify(data)
 			});
 			await statusCheck(res);
-			const resData = await response.json();
+			const resData = await res.json();
 
 			localStorage.setItem('token', resData.token);
 
@@ -33,6 +36,9 @@ function Login({setIsLoggedIn}) {
 			navigate('/personal')
 		} catch (error) {
 			console.log(error);
+		} finally {
+			setUsername('')
+			setPassword('')
 		}
 	}
 
@@ -46,10 +52,22 @@ function Login({setIsLoggedIn}) {
 	return (
 		<form onSubmit={handleLogin} id="login-form">
 			<label htmlFor="login-username">Username</label>
-			<input type="text" id="login-username" required />
+			<input
+				type="text"
+				id="login-username"
+				value={username}
+				onChange={(e) => setUsername(e.target.value)}
+				required
+			/>
 
 			<label htmlFor="login-password">Password</label>
-			<input type="password" id="login-password" required />
+			<input
+				type="password"
+				id="login-password"
+				value={password} // Controlled input
+				onChange={(e) => setPassword(e.target.value)}
+				required
+			/>
 
 			<button type="submit">Log In</button>
 		</form>
