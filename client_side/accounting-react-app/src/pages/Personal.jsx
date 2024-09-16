@@ -5,11 +5,9 @@ function Personal() {
 	const [entries, setEntries] = useState([])
 	const [nextEntryID, setNextEntryID] = useState(0)
 	
-	function addNewEntry(newEntry) {
+	function addNewEntryToClient(newEntry) {
 		setEntries((entries) => {
-			console.log("hello")
 			const updatedEntries = [newEntry,...entries];
-			console.log(updatedEntries);
 			return updatedEntries;
 		});
 		
@@ -18,7 +16,7 @@ function Personal() {
 
 	return (
 		<>
-			<AddEntry entries={entries} addNewEntry={addNewEntry} nextEntryID={nextEntryID}/>
+			<AddEntry entries={entries} addNewEntryToClient={addNewEntryToClient} nextEntryID={nextEntryID}/>
 			<EntryTable entries={entries}/>
 		</>
 	);

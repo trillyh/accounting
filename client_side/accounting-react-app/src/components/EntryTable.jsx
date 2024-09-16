@@ -5,7 +5,7 @@ function EntryTable({ entries }) {
     const [expandedRows, setExpandedRows] = useState([]); // Store id of row being expanded
 // This function takes a date, shortens it, then returns it
     function shortenDate(inputDate) {
-        const date = new Date(inputDate);
+        const date = new Date(`${inputDate}T00:00:00`);
         if (isNaN(date.getTime())) {
             return "Invalid Date";
         }
@@ -57,7 +57,7 @@ function EntryTable({ entries }) {
     const listEntries = entries.map((entry) => (
         <React.Fragment key={entry.id}>
             <tr onClick={() => toggleRowExpanding(entry.id)}>
-                <td>{shortenDate(entry.date)}</td>
+                <td>{shortenDate(entry.entry_date)}</td>
                 <td>{entry.description}</td>
             </tr>
             {expandedRow(entry)}
