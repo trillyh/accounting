@@ -9,4 +9,5 @@ urlpatterns = [
     path('logout/', logout, name='logout_user'),
     path('create_journal_entry/', create_journal_entry, name='create_entry'),
     path('create_subentry/', create_subentry, name='create_subentry'),
+    path('get_all_entries/', get_all_entries, name='get_all_entry'),
 ]

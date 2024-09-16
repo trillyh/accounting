@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class JournalEntry(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    entry_date = models.DateTimeField()
+    entry_date = models.DateField()
     description = models.CharField(max_length=250)
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):

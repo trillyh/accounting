@@ -61,6 +61,25 @@ def journal_entry_retrieve_update_destroy(request, pk):
         entry.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
+@api_view(['GET'])#type: ignore
+@authentication_classes([TokenAuthentication])#type: ignore
+@permission_classes([IsAuthenticated])#type: ignore
+def get_all_entries(request):
+    user = request.user
+    try:
+        entries = JournalEntry.objects.filter(user=user)
+    except:
+        return Response(data={"error": "Error finding journal entry current user"},
+                        status=status.HTTP_400_BAD_REQUEST)
+
+    if entries:
+        serializer = JournalEntrySerializer(instance=entries, many=True)
+        return Response(data=serializer.data,
+                        status=status.HTTP_200_OK)
+    return Response(data={"error": "Error occured in the server"},
+                    status=status.HTTP_400_BAD_REQUEST);
+
 @api_view(['POST'])#type: ignore
 @authentication_classes([TokenAuthentication])#type: ignore
 @permission_classes([IsAuthenticated])#type: ignore
@@ -80,8 +99,6 @@ def create_journal_entry(request):
 @permission_classes([IsAuthenticated])#type: ignore
 def create_subentry(request):
     user = request.user
-    
-    print(request.data["journal_entry_id"])
     try:
         journal_entry = JournalEntry.objects.get(pk=request.data["journal_entry_id"])
     except: 
