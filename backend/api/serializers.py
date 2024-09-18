@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 
 class JournalEntrySerializer(serializers.ModelSerializer):
     #All fields in serializers are treated as required unless marked otherwise
-    entry_date = serializers.DateField(format='%Y-%m-%d %H:%M')
+    entry_date = serializers.DateField(format='%Y-%m-%d')
     
     created_at = serializers.DateTimeField(format='%Y-%m-%d %H:%M', read_only=True)    
     

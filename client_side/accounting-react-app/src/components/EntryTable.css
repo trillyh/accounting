@@ -75,3 +75,8 @@ label {
         margin-bottom: 5px;
     }
 }
+
+.delete-btn {
+	background-color: #d9534f;
+    color: white;
+}

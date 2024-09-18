@@ -119,6 +119,23 @@ def create_subentry(request):
         return Response(data=serializer.data, status=status.HTTP_201_CREATED)
     return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
+@api_view(['POST'])#type: ignore
+@authentication_classes([TokenAuthentication])#type: ignore
+@permission_classes([IsAuthenticated])#type: ignore
+def delete_entry(request):
+    try:
+        deleting_entry_pk = request.data["entry_id"]
+        entry = JournalEntry.objects.get(pk=deleting_entry_pk)
+    except:
+        return Response(data={"error": "Invalid entry id or no entry exist with that ID"}, 
+                              status=status.HTTP_400_BAD_REQUEST)
+    if entry.user != request.user:
+        return Response(data={"error": "Not allowed to delete someone else entry"}, 
+                              status=status.HTTP_400_BAD_REQUEST)
+ 
+    entry.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
 @api_view(['POST'])
 def register_user(request):
     serializer = UserSerializer(data=request.data, partial=False)

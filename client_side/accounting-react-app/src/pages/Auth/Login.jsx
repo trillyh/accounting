@@ -11,7 +11,7 @@ function Login({setIsLoggedIn}) {
 	const [password, setPassword] = useState('');
 
 	const navigate = useNavigate();
-	const handleLogin = async (event) => {
+	async function handleLogin() {
 		event.preventDefault();
 
 		const data = {
