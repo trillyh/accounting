@@ -1,5 +1,5 @@
 import {useState} from 'react'
-function AddEntry({entries, addNewEntryToClient: addNewEntryToClient, nextEntryID}) {
+function AddEntry({addNewEntryToClient: addNewEntryToClient}) {
 	const createEntryUrl = 'http://127.0.0.1:8000/create_journal_entry/'
 
 	const [dateTime, setDateTime] = useState(() => {
@@ -12,7 +12,6 @@ function AddEntry({entries, addNewEntryToClient: addNewEntryToClient, nextEntryI
 	const handleSubmitingNewEntry = async (e) => {
 		e.preventDefault();
 		let newEntry = {
-			id: nextEntryID,
 			entry_date: dateTime,
 			description: inputEntryDescription
 		}
@@ -29,19 +28,20 @@ function AddEntry({entries, addNewEntryToClient: addNewEntryToClient, nextEntryI
 				body: JSON.stringify(newEntry)
 			});
 
-			await statusCheck(res);
+			if (!res.ok) {
+				throw new Error(await res.text());
+			}
+			
+
+			console.log("added new entry");
+
+			// Take the entry from client, add ID from API response
 			const resData = await res.json();
+			newEntry["id"] = resData["id"]
 			addNewEntryToClient(newEntry);
 		} catch (error) {
-			console.log(error);
+			console.log(error.message);
 		} 	
-	}
-
-	async function statusCheck(res) {
-		if (!res.ok) {
-			throw new Error(await res.text());
-		}
-		return res;
 	}
 
 	return (

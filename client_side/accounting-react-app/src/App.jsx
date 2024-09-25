@@ -1,4 +1,4 @@
-<script src="http://localhost:8097"></script>
+//<script src="http://localhost:8097"></script>
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import Navbar from './components/Navbar.jsx';
@@ -11,13 +11,6 @@ import Personal from './pages/Personal.jsx'
 
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-	useEffect (() => {
-		const token = localStorage.getItem('token');
-		if (token) {
-			setIsLoggedIn(true)
-		}
-	}, []);
 
 	return (
 		<Router>
